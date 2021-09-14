@@ -1,12 +1,13 @@
-from rest_framework import viewsets
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
-from rest_framework.pagination import PageNumberPagination
 from django.shortcuts import get_object_or_404
+from rest_framework import viewsets
+from rest_framework.pagination import PageNumberPagination
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from .permission import IsAdminOrModerUser, IsOwnerOrReadOnly
 from reviews.models import Review
 from titles.models import Title
-from .serializers import ReviewSerializer, CommentSerializer
+
+from .permission import IsAdminOrModerUser, IsOwnerOrReadOnly
+from .serializers import CommentSerializer, ReviewSerializer
 
 
 class ReviewViewSet(viewsets.ModelViewSet):
@@ -25,8 +26,7 @@ class ReviewViewSet(viewsets.ModelViewSet):
     def get_queryset(self):
         title_id = self.request.parser_context['kwargs'].get('title_id')
         title = get_object_or_404(Title, id=title_id)
-        queryset = title.review.all()
-        return queryset
+        return title.review.all()
 
     def perform_create(self, serializer):
         title_id = self.request.parser_context['kwargs'].get('title_id')
@@ -51,8 +51,7 @@ class CommentViewSet(viewsets.ModelViewSet):
         title_id = self.request.parser_context['kwargs'].get('title_id')
         review_id = self.request.parser_context['kwargs'].get('review_id')
         review = get_object_or_404(Review, id=review_id, title_id=title_id)
-        queryset = review.comments.all()
-        return queryset
+        return review.comments.all()
 
     def perform_create(self, serializer):
         title_id = self.request.parser_context['kwargs'].get('title_id')

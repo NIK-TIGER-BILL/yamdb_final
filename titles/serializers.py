@@ -1,8 +1,8 @@
-from rest_framework import serializers
 from django.db.models import Avg
+from rest_framework import serializers
 
-from titles.models import Title, Category, Genre
 from reviews.models import Review
+from titles.models import Category, Genre, Title
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -32,10 +32,9 @@ class TitleSerializer(serializers.ModelSerializer):
         score_avg = (Review.objects.filter(title_id=obj.id).
                      aggregate(Avg('score'))['score__avg'])
         if score_avg is None:
-            rating = None
+            return None
         else:
-            rating = round(score_avg, 0)
-        return rating
+            return round(score_avg, 0)
 
 
 class TitlePostSerializer(serializers.ModelSerializer):

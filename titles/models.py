@@ -1,6 +1,7 @@
-from django.db import models
-from django.core.validators import MaxValueValidator
 import datetime
+
+from django.core.validators import MaxValueValidator
+from django.db import models
 
 now = datetime.datetime.now()
 

@@ -2,11 +2,12 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters, mixins, viewsets
 from rest_framework.pagination import PageNumberPagination
 
-from titles.models import Title, Category, Genre
-from .permissions import IsAdminUserOrReadOnly
-from .serializers import (TitleSerializer, CategorySerializer,
-                          GengreSerializer, TitlePostSerializer)
+from titles.models import Category, Genre, Title
+
 from .filters import TitleFilter
+from .permissions import IsAdminUserOrReadOnly
+from .serializers import (CategorySerializer, GengreSerializer,
+                          TitlePostSerializer, TitleSerializer)
 
 
 class MyMixin(mixins.CreateModelMixin,
