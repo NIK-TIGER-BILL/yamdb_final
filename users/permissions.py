@@ -9,4 +9,4 @@ class IsAdmin(permissions.BasePermission):
             return False
         if request.user.is_staff or request.user.role == UserRole.ADMIN:
             return True
-        return None
+        return False
