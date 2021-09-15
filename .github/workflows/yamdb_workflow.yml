@@ -22,7 +22,7 @@ jobs:
     - name: Test with flake8 and django tests
       run: |
         python -m flake8
-        python manage.py test
+        pytest
 
   build_and_push_to_docker_hub:
     name: Push Docker image to Docker Hub
