@@ -32,3 +32,4 @@ djangorestframework-simplejwt==4.3.0
 gunicorn==20.0.4
 psycopg2-binary==2.8.5
 PyJWT==1.7.1
+django-environ
