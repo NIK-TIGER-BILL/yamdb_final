@@ -69,3 +69,15 @@ jobs:
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
             sudo docker-compose up -d
+
+  telegram_message:
+    name: Send telegram message
+      runs-on: ubuntu-latest
+      steps:
+        - uses: actions/checkout@master
+        - name: send custom message with args
+          uses: appleboy/telegram-action@master
+          with:
+            to: ${{ secrets.TELEGRAM_TO }}
+            token: ${{ secrets.TELEGRAM_TOKEN }}
+            args: The ${{ github.event_name }} event triggered first step.
