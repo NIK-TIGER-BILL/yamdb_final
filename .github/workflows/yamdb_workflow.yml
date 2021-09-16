@@ -73,6 +73,7 @@ jobs:
   telegram_message:
     name: Send telegram message
     runs-on: ubuntu-latest
+    needs: deploy
     steps:
       - uses: actions/checkout@master
       - name: send custom message with args
