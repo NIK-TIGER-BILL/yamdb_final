@@ -54,8 +54,9 @@ jobs:
           host: ${{ secrets.HOST }}
           username: ${{ secrets.USER }}
           key: ${{ secrets.SSH_KEY }}
+#         stack_file_name: docker-compose.yaml
           script: |
-            sudo docker pull ${{ secrets.USER }}/yamdb_final
+            sudo docker pull ${{ secrets.DOCKER_USERNAME }}/yamdb_final
             sudo docker-compose stop
             sudo docker-compose rm web
             # Создаст файл для переменных окружения
