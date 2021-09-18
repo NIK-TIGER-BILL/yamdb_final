@@ -27,3 +27,5 @@ docker-compose exec web python manage.py createsuperuser
 docker-compose exec web python manage.py loaddata fixtures.json 
 ```
 Данная команда загрузит начальные данные из фиксатуры
+
+Публичный IP: 178.154.204.234
