@@ -11,7 +11,7 @@
 ```
 docker-compose up
 ```
-Можно использовать с флагом -d, чтобы убрать сообщение от логов
+Можно использовать с флагом -d, чтобы убрать сообщение от логов.  
 Может пригодится:
 ```
 docker-compose exec web python manage.py migrate --noinput # Проведение миграции
@@ -21,11 +21,11 @@ docker-compose exec web python manage.py collectstatic --no-input  # Сбор с
 ```
 docker-compose exec web python manage.py createsuperuser
 ```
-Далее от вас потребуют вести имя суперпользователя, его почту, и пароль
+Далее от вас потребуют вести имя суперпользователя, его почту, и пароль  
 ## команда для заполнения базы начальными данными
 ```
 docker-compose exec web python manage.py loaddata fixtures.json 
 ```
 Данная команда загрузит начальные данные из фиксатуры
 
-Публичный IP: 178.154.204.234
+Публичный IP: 178.154.204.234 (сервер отключен)
