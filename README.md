@@ -16,28 +16,92 @@
 Произведению может быть присвоен **жанр (Genre)** из списка предустановленных (например, «Сказка», «Рок» или «Артхаус»). Новые жанры может создавать только администратор.
 Благодарные или возмущённые пользователи оставляют к произведениям текстовые **отзывы (Review)** и ставят произведению оценку в диапазоне от одного до десяти (целое число); из пользовательских оценок формируется усреднённая оценка произведения — рейтинг (целое число). На одно произведение пользователь может оставить только один отзыв.
 
-## команды для запуска приложения
+## Подготовка и запуск проекта
+### Склонировать репозиторий на локальную машину:
 ```
-docker-compose up
+git clone https://github.com/NIK-TIGER-BILL/foodgram-project-react
 ```
-Можно использовать с флагом -d, чтобы убрать сообщение от логов.  
-Может пригодится:
+## Для работы с удаленным сервером (на ubuntu):
+* Выполните вход на свой удаленный сервер
+
+* Установите docker на сервер:
 ```
-docker-compose exec web python manage.py migrate --noinput # Проведение миграции
-docker-compose exec web python manage.py collectstatic --no-input  # Сбор статики
+sudo apt install docker.io 
 ```
-## команда для создания суперпользователя
+* Установите docker-compose на сервер:
 ```
-docker-compose exec web python manage.py createsuperuser
+sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
-Далее от вас потребуют вести имя суперпользователя, его почту, и пароль  
-## команда для заполнения базы начальными данными
+* Локально отредактируйте файл infra/nginx.conf и в строке server_name впишите свой IP
+* Скопируйте файлы docker-compose.yml и nginx.conf из директории infra на сервер:
 ```
-docker-compose exec web python manage.py loaddata fixtures.json 
+scp docker-compose.yml <username>@<host>:/home/<username>/docker-compose.yml
+scp nginx.conf <username>@<host>:/home/<username>/nginx.conf
 ```
-Данная команда загрузит начальные данные из фиксатуры
+
+* Cоздайте .env файл и впишите:
+    ```
+    DB_ENGINE=<django.db.backends.postgresql>
+    DB_NAME=<имя базы данных postgres>
+    DB_USER=<пользователь бд>
+    DB_PASSWORD=<пароль>
+    DB_HOST=<db>
+    DB_PORT=<5432>
+    SECRET_KEY=<секретный ключ проекта django>
+    ```
+* Для работы с Workflow добавьте в Secrets GitHub переменные окружения для работы:
+    ```
+    DB_ENGINE=<django.db.backends.postgresql>
+    DB_NAME=<имя базы данных postgres>
+    DB_USER=<пользователь бд>
+    DB_PASSWORD=<пароль>
+    DB_HOST=<db>
+    DB_PORT=<5432>
+    
+    DOCKER_PASSWORD=<пароль от DockerHub>
+    DOCKER_USERNAME=<имя пользователя>
+    
+    SECRET_KEY=<секретный ключ проекта django>
+
+    USER=<username для подключения к серверу>
+    HOST=<IP сервера>
+    PASSPHRASE=<пароль для сервера, если он установлен>
+    SSH_KEY=<ваш SSH ключ (для получения команда: cat ~/.ssh/id_rsa)>
+
+    TELEGRAM_TO=<ID чата, в который придет сообщение>
+    TELEGRAM_TOKEN=<токен вашего бота>
+    ```
+    Workflow состоит из трёх шагов:
+     - Проверка кода на соответствие PEP8
+     - Сборка и публикация образа бекенда на DockerHub.
+     - Автоматический деплой на удаленный сервер.
+     - Отправка уведомления в телеграм-чат.  
   
-Публичный IP: 178.154.204.234 (сервер на данный момент отключен)
+* На сервере соберите docker-compose:
+```
+sudo docker-compose up -d --build
+```
+* После успешной сборки на сервере выполните команды (только после первого деплоя):
+    - Соберите статические файлы:
+    ```
+    sudo docker-compose exec backend python manage.py collectstatic --noinput
+    ```
+    - Примените миграции:
+    ```
+    sudo docker-compose exec backend python manage.py migrate --noinput
+    ```
+    - Команда для заполнения базы начальными данными (необязательно):  
+    ```
+    docker-compose exec web python manage.py loaddata fixtures.json
+    ```
+    - Создать суперпользователя Django:
+    ```
+    sudo docker-compose exec backend python manage.py createsuperuser
+    ```
+    - Проект будет доступен по вашему IP
+  
+## Проект в интернете
+Проект запущен и доступен по [адресу](http://178.154.204.234) (В данный момент сервер отключен)
 
 ## Авторы.
 [lightmatter314](https://github.com/lightmatter314). Управление пользователями: система регистрации и аутентификации, права доступа, работа с токеном, система подтверждения e-mail.
