@@ -19,7 +19,7 @@
 ## Подготовка и запуск проекта
 ### Склонировать репозиторий на локальную машину:
 ```
-git clone https://github.com/NIK-TIGER-BILL/foodgram-project-react
+git clone https://github.com/NIK-TIGER-BILL/yamdb_final
 ```
 ## Для работы с удаленным сервером (на ubuntu):
 * Выполните вход на свой удаленный сервер
@@ -32,8 +32,8 @@ sudo apt install docker.io
 ```
 sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
 ```
-* Локально отредактируйте файл infra/nginx.conf и в строке server_name впишите свой IP
-* Скопируйте файлы docker-compose.yml и nginx.conf из директории infra на сервер:
+* Локально отредактируйте файл nginx.conf и в строке server_name впишите свой IP
+* Скопируйте файлы docker-compose.yml и nginx.conf из репозитория на сервер:
 ```
 scp docker-compose.yml <username>@<host>:/home/<username>/docker-compose.yml
 scp nginx.conf <username>@<host>:/home/<username>/nginx.conf
