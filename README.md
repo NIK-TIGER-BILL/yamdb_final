@@ -1,5 +1,5 @@
 # YaMDB
-![example workflow](https://github.com/NIK-TIGER-BILL/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)*(falling так как сервер в данный момент отключен, деплой не выполняется)*  
+![example workflow](https://github.com/NIK-TIGER-BILL/yamdb_final/actions/workflows/yamdb_workflow.yml/badge.svg)  
 [![Python](https://img.shields.io/badge/-Python-464646?style=flat-square&logo=Python)](https://www.python.org/)
 [![Django](https://img.shields.io/badge/-Django-464646?style=flat-square&logo=Django)](https://www.djangoproject.com/)
 [![Django REST Framework](https://img.shields.io/badge/-Django%20REST%20Framework-464646?style=flat-square&logo=Django%20REST%20Framework)](https://www.django-rest-framework.org/)
@@ -101,7 +101,7 @@ sudo docker-compose up -d --build
     - Проект будет доступен по вашему IP
   
 ## Проект в интернете
-Проект запущен и доступен по [адресу](http://178.154.204.234) (В данный момент сервер отключен)
+Проект запущен и доступен по [адресу](http://178.154.204.234)
 
 ## Авторы.
 [lightmatter314](https://github.com/lightmatter314). Управление пользователями: система регистрации и аутентификации, права доступа, работа с токеном, система подтверждения e-mail.
