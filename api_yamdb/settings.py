@@ -5,10 +5,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY = os.environ.get('DJ_SECRET_KEY'),
 
-if os.environ.get('DEBUG', default="False") == "True":
-    DEBUG = True
-else:
-    DEBUG = False
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
